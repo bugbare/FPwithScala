@@ -43,18 +43,19 @@ object Lists {
    * @return The largest element in `xs`
    * @throws java.util.NoSuchElementException if `xs` is an empty list
    */
-  @throws(classOf[NoSuchElementException])
-    def max(xs: List[Int]): Int = {
+  //@throws(classOf[NoSuchElementException])
+  def max(xs: List[Int]): Int = {
 
-      try {
-        if(xs.nonEmpty)
-          if (xs.head > xs.tail)
-            print
-      } catch {
-        case nsee: NoSuchElementException => handleNseeException(nsee)
-        case _: Throwable => println("Got some other kind of exception")
+    try {
+      val head = xs.head
+      val tail = xs.tail
+      if (tail.isEmpty) head
+      else {
+        val m = max(tail)
+        if (head >= m) head else m
       }
+    } catch {
+      case nsee: NoSuchElementException => throw (nsee)
     }
-
-  def min(element: Int)
   }
+}
